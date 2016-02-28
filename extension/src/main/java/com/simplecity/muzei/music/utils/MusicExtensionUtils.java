@@ -4,6 +4,7 @@ import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
@@ -14,6 +15,7 @@ import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -80,6 +82,13 @@ public class MusicExtensionUtils {
      * @param trackName            the name of the song
      */
     public static void updateMuzei(MusicExtensionSource musicExtensionSource, String artistName, String albumName, String trackName) {
+
+        if (ContextCompat.checkSelfPermission(musicExtensionSource,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            Log.w(TAG, "Missing read external storage permission.");
+            return;
+        }
 
         if (musicExtensionSource == null || artistName == null || albumName == null || trackName == null) {
             return;

@@ -6,18 +6,22 @@ repositories {
 
 dependencies {
     compile 'com.google.android.apps.muzei:muzei-api:2.0'
+    compile 'com.android.support:appcompat-v7:23.2.0'
 }
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 23
     buildToolsVersion "23.0.2"
+    
+    //Re-enable deprecated Apache library, since Volley depends on it.
+     useLibrary 'org.apache.http.legacy'
 
     def Properties versionProps = new Properties()
     versionProps.load(new FileInputStream(file('version.properties')))
 
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 22
+        targetSdkVersion 23
 
         versionName versionProps['name']
         versionCode versionProps['code'].toInteger()

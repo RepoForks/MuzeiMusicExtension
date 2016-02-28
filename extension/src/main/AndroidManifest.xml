@@ -10,14 +10,14 @@
     <application
         android:name=".MusicExtensionApplication"
         android:allowBackup="true"
-        android:label="@string/app_name"
-        android:icon="@drawable/ic_launcher">
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name">
 
         <service
             android:name=".MusicExtensionSource"
-            android:label="@string/source_name"
             android:description="@string/source_description"
-            android:icon="@drawable/ic_source">
+            android:icon="@drawable/ic_source"
+            android:label="@string/source_name">
             <intent-filter>
                 <action android:name="com.google.android.apps.muzei.api.MuzeiArtSource" />
             </intent-filter>
@@ -29,12 +29,16 @@
             <meta-data
                 android:name="settingsActivity"
                 android:value=".SettingsActivity" />
+
+            <meta-data
+                android:name="setupActivity"
+                android:value=".SetupActivity" />
         </service>
 
         <receiver
             android:name="com.simplecity.muzei.music.MyReceiver"
-            android:exported="true"
-            android:enabled="true">
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
                 <!-- Default android -->
                 <action android:name="com.android.music.metachanged" />
@@ -105,8 +109,13 @@
 
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/title_settings"
             android:exported="true"
+            android:label="@string/title_settings"
+            android:theme="@style/Theme.MusicExtension.Settings" />
+
+        <activity
+            android:name=".SetupActivity"
+            android:label="@string/title_settings"
             android:theme="@style/Theme.MusicExtension.Settings" />
 
         <service
